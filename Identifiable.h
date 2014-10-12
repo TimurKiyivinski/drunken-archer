@@ -18,7 +18,7 @@ class IdentifiableObject
         // Class constructor
         IdentifiableObject(vector<string> idents);
         // Destructor
-        ~IdentifiableObject();
+        virtual ~IdentifiableObject();
         // Adds an identifier to _identifiers
         void add_identifier(string id);
         // Returns true if id is in _identifiers
