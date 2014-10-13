@@ -24,9 +24,8 @@ class GameObject: public IdentifiableObject
         // Returns the short description
         string get_short_description();
         // Returns the full description
-        // method is virtual because Item uses this
-        // default method wheras Player will
-        // override this method.
+        // method is not actually virtual as
+        // it is implemented
         virtual string get_full_description();
 };
 #endif

@@ -6,9 +6,11 @@
 
 #include "GameObject.h"
 
+// Game Item class
 class Item: public GameObject
 {
     public:
+        // Constructor for GameObject parent
         Item(vector<string> ids, string name, string desc);
 };
 #endif

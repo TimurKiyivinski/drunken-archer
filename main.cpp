@@ -15,9 +15,6 @@ using namespace std;
 
 // IdentifiableObject is too long
 #define IdObj IdentifiableObject
-// Laziness strikes 10 lines in.
-#define y "Yes"
-#define n "No"
 
 int main(void)
 {
@@ -97,9 +94,9 @@ int main(void)
         (cout << "Found myself!" << endl):
         (cout << "I can't find myself." << endl);
     // Test player locate nothing
-    timur->locate("something_i_do_not_have") == NULL ?
+    timur->locate("something_i_do_not_have") != NULL ?
         (cout << "I have something I don't" << endl):
-        (cout << "I don't have something I don't have!");
+        (cout << "I don't have something I don't have!" << endl);
     // Test player full description
     cout << timur->get_full_description() << endl;
     // Free memory
