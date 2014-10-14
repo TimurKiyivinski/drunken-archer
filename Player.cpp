@@ -31,14 +31,13 @@ GameObject* Player::locate(string id)
 
 string Player::get_full_description()
 {
-    // Create a return string
+    // Create the return string
     string returnStr("You are " +
             get_name() + 
             " " + 
-            GameObject::get_full_description());
-    returnStr += "\nYou are carrying:\n";
-    // Add all items in the inventory
-    returnStr += _inventory->get_item_list();
+            GameObject::get_full_description() +
+            "\nYou are carrying:\n" +
+            _inventory->get_item_list());
     // Switch tabs to newlines for proper output
     replace(returnStr.begin(), returnStr.end(), '\t', '\n');
     return returnStr;

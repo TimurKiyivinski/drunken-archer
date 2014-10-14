@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "Inventory.h"
 #include "Player.h"
+#include "Bag.h"
 
 // No std::
 using namespace std;
@@ -18,90 +19,47 @@ using namespace std;
 
 int main(void)
 {
-    // Create initial list of ids
-    vector<string> ids;
-    ids.push_back("shovel");
-    ids.push_back("spade");
-    // Create an item with these ids
-    Item *shovel = new Item(ids, "a shovel",
-            "this be eh mighty fine shovel!");
-    // Test if the item is identifiable
-    shovel->are_you("spade") ?
-        (cout << "Identified shovel." << endl):
-        (cout << "Me no comprendo." << endl);
-    // Gets item short description
-    cout << shovel->get_short_description() << endl;
-    // Gets item long description
-    cout << shovel->get_full_description() << endl;
-    // Test Player
-    Player *timur = new Player("Timur", "the guy who wears GEEK shirts a lot!");
-    // Create an inventory!
-    Inventory *bag = timur->get_inventory();
-    bag->put(shovel);
-    // Test if inventory has an item
-    bag->has_item("shovel") ?
-        (cout << "Bag has a shovel." << endl):
-        (cout << "No shovel found!" << endl);
-    // Fetch item from bag
-    Item *shovel_mem = bag->fetch("shovel");
-    shovel_mem->are_you("shovel") ?
-        (cout << "Identified shovel_mem." << endl):
-        (cout << "Me no comprendo." << endl);
-    // Test that shovel is still in bag
-    bag->has_item("shovel") ?
-        (cout << "Bag has a shovel." << endl):
-        (cout << "No shovel found!" << endl);
-    // Take item from bag
-    Item *stolen = bag->take("shovel");
-    stolen->are_you("shovel") ?
-        (cout << "Identified stolen." << endl):
-        (cout << "Me no comprendo." << endl);
-    // Test that shovel is still in bag
-    bag->has_item("shovel") ?
-        (cout << "Bag has a shovel." << endl):
-        (cout << "No shovel found!" << endl);
-    // Add items to bag to test
-    vector<string> iv1;
-    vector<string> iv2;
-    iv1.push_back("sword");
-    iv1.push_back("weapon");
-    iv2.push_back("food");
-    iv2.push_back("delicious");
-    Item *sword = new Item(iv1, "sword", 
-            "legend has it that this sword is part of a legend!");
-    Item *kebab = new Item(iv2, "kebab", 
-            "the programmer of this item was hungry grrrr");
-    bag->put(sword);
-    bag->put(kebab);
-    // Reclaim what is stolen!
-    bag->put(stolen);
-    // Test the bag's inventory
-    cout << bag->get_item_list() << endl;
-    // Test player identifiers
-    timur->are_you("me") ?
-        (cout << "Identified timur with me." << endl):
-        (cout << "Me no comprendo." << endl);
-    timur->are_you("inventory") ?
-        (cout << "Identified timur with inventory." << endl):
-        (cout << "Me no comprendo." << endl);
-    // Test player locate items
-    Item *restolen_food = (Item *) timur->locate("food");
-    restolen_food == NULL ?
-        (cout << "Failed to steal food!" << endl):
-        (cout << "Stole food again!" << endl);
-    // Test player locate itself
-    timur->locate("me") != NULL ?
-        (cout << "Found myself!" << endl):
-        (cout << "I can't find myself." << endl);
-    // Test player locate nothing
-    timur->locate("something_i_do_not_have") != NULL ?
-        (cout << "I have something I don't" << endl):
-        (cout << "I don't have something I don't have!" << endl);
-    // Test player full description
-    cout << timur->get_full_description() << endl;
-    // Free memory
-    delete timur;
-    delete restolen_food;
+    // A bag!
+    Bag *b1 = new Bag(vector<string>(), "Chest", "stuff inside!");
+    // Get the address of the bags inventory to be manipulated
+    Inventory *myInventory = b1->get_inventory();
+    // Create an item to add to the inventory
+    Item *myItem = new Item(vector<string>(), "Mouse", "a digital one!");
+    // Add item to the inventory
+    myInventory->put(myItem);
+    // Test locate item
+    b1->locate("mouse") == NULL ?
+        (cout << "Could not find mouse!" << endl):
+        (cout << "Found mouse!" << endl);
+    // Test locate itself
+    b1->locate("chest") == NULL ?
+        (cout << "Bag can't find itself!" << endl):
+        (cout << "Bag found itself!" << endl);
+    // Test locate nothing
+    b1->locate("nothing") == NULL ?
+        (cout << "Nothing does not exist!" << endl):
+        (cout << "Blame dark matter!" << endl);
+    // Test bag full description
+    cout << b1->get_full_description() << endl;
+    // Test bag in bag!
+    Bag *b2 = new Bag(vector<string>(), "baggy", "oh, just some bag..");
+    // Item for b2
+    Item *myNewItem = new Item(vector<string>(), "wisdom", "2b||!(2b)");
+    // Get b2's inventory
+    Inventory *myNewInventory = b2->get_inventory();
+    // Add item to b2
+    myNewInventory->put(myNewItem);
+    // Add b2 to b1
+    myInventory->put(b2);
+    // Locate b2
+    cout << b1->locate("baggy")->get_name() << endl;
+    // Locate items in b1 again?
+    cout << b1->locate("mouse")->get_name() << endl;
+    // b1 try locate items in b2
+    b1->locate("wisdom") == NULL ?
+        (cout << "b1 cannot locate items in b2" << endl):
+        (cout << "b1 has done the impossible" << endl);
+    delete b1;
     // Absolutely necessary comment for 'return 0;'.
     return 0;
 }
