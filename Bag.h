@@ -1,3 +1,9 @@
+// Author: Timothy Kiyui (4316886)
+// File: Bag.h
+
+#ifndef BAG
+#define BAG
+
 #include "GameObject.h"
 #include "Inventory.h"
 #include "Item.h"
@@ -21,3 +27,4 @@ class Bag: public Item
         // Returns memory of _inventory
         Inventory *get_inventory();
 };
+#endif

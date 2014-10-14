@@ -1,3 +1,6 @@
+// Author: Timothy Kiyui (4316886)
+// File: Bag.cpp
+
 #include "Bag.h"
 #include "GameObject.h"
 #include "Inventory.h"
