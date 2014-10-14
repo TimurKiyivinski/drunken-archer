@@ -34,7 +34,7 @@ int main(void)
     // Gets item long description
     cout << shovel->get_full_description() << endl;
     // Test Player
-    Player *timur = new Player();
+    Player *timur = new Player("Timur", "the guy who wears GEEK shirts a lot!");
     // Create an inventory!
     Inventory *bag = timur->get_inventory();
     bag->put(shovel);

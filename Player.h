@@ -16,7 +16,7 @@ class Player: public GameObject
         Inventory *_inventory;
     public:
         // Constructor as _inventory need memory to be allocated
-        Player();
+        Player(string name, string desc);
         // Destructor method
         virtual ~Player();
         // Downcasts a found item in inventory

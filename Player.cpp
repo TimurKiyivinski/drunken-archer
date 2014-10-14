@@ -5,8 +5,8 @@
 #include <algorithm>
 #include <string>
 
-Player::Player()
-    :GameObject(vector<string>(), "", "")
+Player::Player(string name, string desc)
+    :GameObject(vector<string>(), name, desc)
 {
     // Allocates memory for Inventory
     _inventory = new Inventory();
@@ -32,7 +32,11 @@ GameObject* Player::locate(string id)
 string Player::get_full_description()
 {
     // Create a return string
-    string returnStr("You are carrying:\n");
+    string returnStr("You are " +
+            get_name() + 
+            " " + 
+            GameObject::get_full_description());
+    returnStr += "\nYou are carrying:\n";
     // Add all items in the inventory
     returnStr += _inventory->get_item_list();
     // Switch tabs to newlines for proper output
