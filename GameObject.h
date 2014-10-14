@@ -17,8 +17,8 @@ class GameObject: public IdentifiableObject
     public:
         // Constructor, initializes IdentifiableObject
         GameObject(vector<string> ids, string name, string desc);
-        // Virtual desctructor
-        virtual ~GameObject();
+        // Virtual desctructor, makes GameObject an abstract class
+        virtual ~GameObject()=0;
         // Returns the name
         string get_name();
         // Returns the short description
