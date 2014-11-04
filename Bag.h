@@ -7,10 +7,11 @@
 #include "GameObject.h"
 #include "Inventory.h"
 #include "Item.h"
+#include "IHaveInventory.h"
 #include <string>
 #include <vector>
 
-class Bag: public Item
+class Bag: public Item, public IHaveInventory
 {
     private:
         // Inventory to store Items

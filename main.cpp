@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "Item.h"
 #include "Inventory.h"
+#include "IHaveInventory.h"
 #include "Player.h"
 #include "Bag.h"
 

@@ -6,10 +6,11 @@
 
 #include "GameObject.h"
 #include "Inventory.h"
+#include "IHaveInventory.h"
 #include <string>
 
 // Player class, inherits from GameObject
-class Player: public GameObject
+class Player: public GameObject, public IHaveInventory
 {
     private:
         // All items will be stored here.

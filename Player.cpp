@@ -6,7 +6,8 @@
 #include <string>
 
 Player::Player(string name, string desc)
-    :GameObject(vector<string>(), name, desc)
+    :GameObject(vector<string>(), name, desc),
+     IHaveInventory()
 {
     // Allocates memory for Inventory
     _inventory = new Inventory();
@@ -33,7 +34,7 @@ string Player::get_full_description()
 {
     // Create the return string
     string returnStr("You are " +
-            get_name() + 
+            GameObject::get_name() + 
             " " + 
             GameObject::get_full_description() +
             "\nYou are carrying:\n" +

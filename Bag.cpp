@@ -5,12 +5,13 @@
 #include "GameObject.h"
 #include "Inventory.h"
 #include "Item.h"
+#include "IHaveInventory.h"
 #include <string>
 #include <vector>
 #include <algorithm>
 
 Bag::Bag(vector<string> ids, string name, string desc):
-    Item(ids, name, desc)
+    Item(ids, name, desc), IHaveInventory()
 {   
     // Allocates memory for Inventory
     _inventory = new Inventory();
@@ -33,7 +34,7 @@ string Bag::get_full_description()
 {   
     // Create the return string
     string returnStr("In the " +
-            get_name() +
+            GameObject::get_name() +
             " you can see:\n" +
             _inventory->get_item_list());
     // Switch tabs to newlines for proper output
