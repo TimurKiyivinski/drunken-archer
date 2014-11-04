@@ -1,5 +1,9 @@
+#include <iostream>
 #include "LookCommand.h"
+#include "GameObject.h"
+#include "Inventory.h"
 #include "Player.h"
+#include "Bag.h"
 
 LookCommand::LookCommand(): Command(vector<string>())
 {
@@ -20,21 +24,24 @@ string LookCommand::execute(Player *p, vector<string> text)
     // Proper syntax requires container id
     if (text.size() == 5 && text[3] != "in")
         return "what do you want to look in?";
-    else
+    else if (text.size() == 5)
         return LookCommand::look_at_in(p, text[2], text[4]); // With container
-    return LookCommand::look_at_in(p, text[2], ""); // Without container
+    else
+        return LookCommand::look_at_in(p, text[2], ""); // Without container
 }
 
 string LookCommand::look_at_in(Player *p, string id, string container_id)
 {
     // Dummy object to hold item
     GameObject* wantedItem;
+    Inventory* p_inventory = p->get_inventory();
     // If the item has no container, look for item directly
-    if (container_id == "") wantedItem = p->locate(id);
+    if (container_id == "" || p->are_you(container_id))
+        wantedItem = p_inventory->fetch(id);
     else
     {
         // If the item has a container, look for the container
-        Bag wantedBag = p->locate(container_id);
+        Bag* wantedBag = (Bag*) p_inventory->fetch(container_id);
         // Either get the item from container
         // or warn that the bag does not exist
         if (wantedBag != NULL) wantedItem = wantedBag->locate(id);
@@ -44,9 +51,11 @@ string LookCommand::look_at_in(Player *p, string id, string container_id)
     if (wantedItem == NULL)
     {
         // Better formatting
+        string returnStr("");
         container_id == "" ?
-            (return "i cannot find the " + id):
-            (return "i cannot find the " + id + " in " + container_id);
+            (returnStr = "i cannot find the " + id):
+            (returnStr = "i cannot find the " + id + " in " + container_id);
+        return returnStr;
     }
     // Return the item description
     return wantedItem->get_full_description();

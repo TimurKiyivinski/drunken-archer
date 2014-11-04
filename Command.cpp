@@ -5,7 +5,3 @@
 Command::Command(vector<string> ids): IdentifiableObject(ids)
 {
 }
-
-string Command::execute(Player *p, vector<string> text)
-{
-}

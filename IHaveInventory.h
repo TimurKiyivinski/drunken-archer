@@ -3,6 +3,7 @@
 
 #ifndef IHAVEINVENTORY_H
 #define IHAVEINVENTORY_H
+
 class IHaveInventory
 {
     public:
