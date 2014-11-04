@@ -32,6 +32,8 @@ string LookCommand::execute(Player *p, vector<string> text)
 
 string LookCommand::look_at_in(Player *p, string id, string container_id)
 {
+    // Return player if player is identifiable by id
+    if (p->are_you(id)) return p->get_full_description();
     // Dummy object to hold item
     GameObject* wantedItem;
     Inventory* p_inventory = p->get_inventory();
