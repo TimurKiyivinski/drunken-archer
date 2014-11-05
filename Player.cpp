@@ -27,7 +27,7 @@ GameObject* Player::locate(string id)
     // Returns self if is id
     if (are_you(id)) return this;
     // Defaults to returning a value from inventory
-    return _inventory->take(id);
+    return _inventory->fetch(id);
 }
 
 string Player::get_full_description()

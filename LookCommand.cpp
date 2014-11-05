@@ -4,6 +4,7 @@
 #include "Inventory.h"
 #include "Player.h"
 #include "Bag.h"
+#include "IHaveInventory.h"
 
 LookCommand::LookCommand(): Command(vector<string>())
 {
@@ -36,20 +37,11 @@ string LookCommand::look_at_in(Player *p, string id, string container_id)
     if (p->are_you(id)) return p->get_full_description();
     // Dummy object to hold item
     GameObject* wantedItem;
-    Inventory* p_inventory = p->get_inventory();
-    // If the item has no container, look for item directly
-    if (container_id == "" || p->are_you(container_id))
-        wantedItem = p_inventory->fetch(id);
-    else
-    {
-        // If the item has a container, look for the container
-        Bag* wantedBag = (Bag*) p_inventory->fetch(container_id);
-        // Either get the item from container
-        // or warn that the bag does not exist
-        if (wantedBag != NULL) wantedItem = wantedBag->locate(id);
-        else return "i cannot find the " + container_id;
-    }
-    // Warn user if there is no item found
+    IHaveInventory* wantedInventory;
+    if (p->are_you(container_id) || container_id == "") wantedInventory = (IHaveInventory*) p;
+    else wantedInventory = dynamic_cast<IHaveInventory *> (p->locate(container_id));
+    if (wantedInventory == NULL) return "i cannot find the " + container_id;
+    wantedItem = wantedInventory->locate(id);
     if (wantedItem == NULL)
     {
         // Better formatting
@@ -59,6 +51,5 @@ string LookCommand::look_at_in(Player *p, string id, string container_id)
             (returnStr = "i cannot find the " + id + " in " + container_id);
         return returnStr;
     }
-    // Return the item description
     return wantedItem->get_full_description();
 }
