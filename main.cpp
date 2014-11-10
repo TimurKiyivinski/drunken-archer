@@ -30,71 +30,49 @@ vector<string> splitCommand(string strCommand)
 
 int main(void)
 {
-    // Create a player
-    Player *timur = new Player("Timur", "who likes to meow");
-    Inventory *timurInventory = timur->get_inventory();
-    // Create a look command!
+    //Ask to create a player!
+    string playerName, playerDesc;
+    cout << "Please input a player name:" << endl;
+    cin >> playerName;
+    cout << "Please input a player description:" << endl;
+    cin.ignore();
+    getline(cin, playerDesc);
+    Player *player = new Player(playerName, playerDesc);
+    // Check if player is succesfully created
+    if (player == NULL) return 1;
+    else cout << "Player successfully created:" << endl;
+    // Create items!
+    Item *bread = new Item(vector<string>(), "bread", "made with yeast!");
+    Item *sword = new Item(vector<string>(), "sword", "lvl 1 n00bz lel");
+    Item *fish = new Item(vector<string>(), "fish", "smelly stuff");
+    Item *something = new Item(vector<string>(), "something", "divisible by 0");
+    Bag *chest = new Bag(vector<string>(), "chest", "has space!");
+    Bag *pocket = new Bag(vector<string>(), "pocket", "in me pants they are!");
+    Inventory *playerInventory = player->get_inventory();
+    Inventory *chestInventory = chest->get_inventory();
+    Inventory *pocketInventory = pocket->get_inventory();
+    chestInventory->put(bread);
+    chestInventory->put(sword);
+    pocketInventory->put(something);
+    playerInventory->put(fish);
+    playerInventory->put(chest);
+    playerInventory->put(pocket);
+    // Infinite command loop
+    string commandText("");
+    vector<string> commandVector;
     LookCommand commands;
-    // Dummy text for commands
-    string commandText("look at inventory");
-    vector<string> commandVector = splitCommand(commandText);
-    // Test look at me
-    cout << "Test look at me" << endl;
-    cout << commands.execute(timur, commandVector) << endl;
-    // Add Gem!
-    Item *gem = new Item(vector<string>(), "gem", "it is pretty!");
-    timurInventory->put(gem);
-    // Test look at unknown
-    cout << "Test look at unknown" << endl;
-    commandText = "look at something_that_does_not_exist";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    // Test look at gem
-    cout << "Test look at gem" << endl;
-    commandText = "look at gem";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    // Test look at gem in me
-    cout << "Test look at gem in me" << endl;
-    commandText = "look at gem in inventory";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    // Test look at no bag
-    cout << "Test look at no bag" << endl;
-    commandText = "look at gem in chest";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    // Test look at gem in bag
-    cout << "Test look at gem in bag" << endl;
-    Bag *timurBag = new Bag(vector<string>(), "chest", "contains stuff");
-    Inventory *bagInventory = timurBag->get_inventory();
-    bagInventory->put(timurInventory->take("gem"));
-    timurInventory->put(timurBag);
-    commandText = "look at gem in chest";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    // Test look at no gem in bag
-    cout << "Test look at no gem in bag" << endl;
-    Item* stolen_gem = bagInventory->take("gem");
-    commandText = "look at gem in chest";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    // Test invalid commands!
-    cout << "Test invalid commands" << endl;
-    commandText = "live the dreams my lovely hero";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    commandText = "meow meow meow";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    commandText = "look meow meow";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
-    commandText = "look at meow inside meow";
-    commandVector = splitCommand(commandText);
-    cout << commands.execute(timur, commandVector) << endl;
+    while (1)
+    {
+        cout << endl << player->get_full_description() << endl;
+        cout << "Input || quit:" << endl;
+        getline(cin, commandText);
+        if (commandText == "quit") return 0;
+        commandVector = splitCommand(commandText);
+        cout << endl << "Output:" << endl;
+        cout << commands.execute(player, commandVector) << endl;
+    }
     // Kill timur
-    delete timur;
+    delete player;
     // Absolutely necessary comment for 'return 0;'.
     return 0;
 }
