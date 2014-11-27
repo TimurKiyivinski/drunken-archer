@@ -6,7 +6,7 @@ CFLAGS = -std=c++0x -DEXTRA
 #TARGET is the name of your main file
 TARGET = main
 #OBJECTS = $(TARGET).o library1.o library.o, all the header files here
-OBJECTS = $(TARGET).o Identifiable.o GameObject.o Item.o Inventory.o IHaveInventory.o Player.o Bag.o Command.o LookCommand.o
+OBJECTS = $(TARGET).o Identifiable.o GameObject.o Item.o Inventory.o IHaveInventory.o Player.o Bag.o Command.o LookCommand.o Location.o Path.o MoveCommand.o CommandProcessor.o
 
 #Do not modify
 $(TARGET) : $(OBJECTS)
@@ -17,4 +17,4 @@ $(TARGET) : $(OBJECTS)
 		$(CC) $(CFLAGS) -c $<
 		
 clean:
-	rm $(OBJECTS) $(TARGET).bin
+	rm -rvf $(OBJECTS) $(TARGET).bin *~

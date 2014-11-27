@@ -33,7 +33,7 @@ GameObject* Bag::locate(string id)
 string Bag::get_full_description()
 {   
     // Create the return string
-    string returnStr("In the " +
+    string returnStr("in the " +
             GameObject::get_name() +
             " you can see:\n" +
             _inventory->get_item_list());

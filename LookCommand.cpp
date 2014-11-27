@@ -1,10 +1,13 @@
-#include <iostream>
+// Author: Timothy Kiyui (4316886)
+// File: LookCommand.cpp
+
 #include "LookCommand.h"
 #include "GameObject.h"
 #include "Inventory.h"
 #include "Player.h"
 #include "Bag.h"
 #include "IHaveInventory.h"
+#include <iostream>
 
 LookCommand::LookCommand(): Command(vector<string>())
 {
