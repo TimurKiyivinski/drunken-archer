@@ -1,0 +1,22 @@
+timur
+the sailor
+look at readme
+look at intel
+look at here
+look at horse
+look at box
+look at hay in box
+go to west
+look at bag
+look at note in bag
+go to north_east
+look at bucket
+go to up
+look at cup
+look at noodles in cup
+go to north_east
+look at head
+look at arrrrr
+go to south
+look at chest
+look at sack in chest

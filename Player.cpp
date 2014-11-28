@@ -14,6 +14,8 @@
     // Adds default identifiers for Player
     add_identifier("me");
     add_identifier("inventory");
+    _location = NULL;
+    _last_location = NULL;
 }
 
 // Free allocated memory

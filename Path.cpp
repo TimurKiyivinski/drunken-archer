@@ -8,7 +8,17 @@
 
 using namespace std;
 
-Path::Path(vector<string> idents):IdentifiableObject(idents){}
+Path::Path(vector<string> idents):IdentifiableObject(idents)
+{
+    _north = NULL;
+    _south = NULL;
+    _east = NULL;
+    _west = NULL;
+    _north_east = NULL;
+    _north_west = NULL;
+    _south_east = NULL;
+    _south_west = NULL;
+}
 
 Path::~Path() {}
 
