@@ -1,5 +1,5 @@
 // Author: Timothy Kiyui (4316886)
-// File: MoveCommand.h
+// File: MoveCommand.cpp
 
 #include "MoveCommand.h"
 #include "Location.h"
